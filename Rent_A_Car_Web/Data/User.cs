@@ -1,6 +1,8 @@
-﻿namespace Rent_A_Car_Web.Data
+﻿
+using Microsoft.AspNetCore.Identity;
+namespace Rent_A_Car_Web.Data
 {
-    public class User
+    public class User: IdentityUser
     {
         public int Id { get; set; }
         public string UserName { get; set; } = "defaultUser";
