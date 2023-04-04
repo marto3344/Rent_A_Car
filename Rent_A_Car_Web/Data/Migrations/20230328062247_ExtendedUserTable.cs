@@ -16,7 +16,7 @@ namespace Rent_A_Car_Web.Data.Migrations
                 type: "nvarchar(256)",
                 maxLength: 256,
                 nullable: false,
-                defaultValue: "",
+                defaultValue: "-",
                 oldClrType: typeof(string),
                 oldType: "nvarchar(256)",
                 oldMaxLength: 256,
@@ -27,7 +27,7 @@ namespace Rent_A_Car_Web.Data.Migrations
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "",
+                defaultValue: "-",
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
@@ -38,7 +38,7 @@ namespace Rent_A_Car_Web.Data.Migrations
                 type: "nvarchar(256)",
                 maxLength: 256,
                 nullable: false,
-                defaultValue: "",
+                defaultValue: "-",
                 oldClrType: typeof(string),
                 oldType: "nvarchar(256)",
                 oldMaxLength: 256,
@@ -49,7 +49,7 @@ namespace Rent_A_Car_Web.Data.Migrations
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: "-");
 
             migrationBuilder.AddColumn<string>(
                 name: "IdentityNumber",
@@ -63,14 +63,14 @@ namespace Rent_A_Car_Web.Data.Migrations
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: "-");
 
             migrationBuilder.AddColumn<string>(
                 name: "Password",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: "-");
 
             migrationBuilder.AddColumn<int>(
                 name: "Role",
