@@ -9,5 +9,6 @@ namespace Rent_A_Car_Web.Data
             : base(options)
         {
         }
+        public DbSet<Car>Cars { get; set; }
     }
 }

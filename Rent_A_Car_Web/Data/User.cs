@@ -9,7 +9,11 @@ namespace Rent_A_Car_Web.Data
         public string FirstName { get; set; } = "";
         public string LastName { get; set; } = "";
         public string IdentityNumber { get; set; } = "";
-        public List<Car> RentedCars { get; set; }=new List<Car>(){ };
+        public virtual HashSet<Car> RentedCars { get; set; }
+        public User()
+        {
+                RentedCars = new HashSet<Car>();
+        }
        
     }
 }

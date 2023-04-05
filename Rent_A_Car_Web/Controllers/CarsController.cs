@@ -8,5 +8,9 @@ namespace Rent_A_Car_Web.Views.Cars
         {
             return View();
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
