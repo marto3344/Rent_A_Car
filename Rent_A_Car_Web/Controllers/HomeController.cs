@@ -17,6 +17,10 @@ namespace Rent_A_Car_Web.Controllers
         {
             return View();
         }
+        public IActionResult ViewCars()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

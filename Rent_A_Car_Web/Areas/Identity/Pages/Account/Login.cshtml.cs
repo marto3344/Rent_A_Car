@@ -116,7 +116,7 @@ namespace Rent_A_Car_Web.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 //Console.WriteLine(Input.UserName);
-                Console.WriteLine(Input.Password);
+
                 var user =await _userManager.FindByNameAsync(Input.Email);            
                 if (user != null)
                 {

@@ -9,8 +9,7 @@ namespace Rent_A_Car_Web.Data
         public string FirstName { get; set; } = "";
         public string LastName { get; set; } = "";
         public string IdentityNumber { get; set; } = "";
-        public string PhoneNumber { get; set; } = "";
- 
+        public List<Car> RentedCars { get; set; }=new List<Car>(){ };
        
     }
 }
