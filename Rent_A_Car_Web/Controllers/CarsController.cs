@@ -1,16 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Rent_A_Car_Web.Data;
 
 namespace Rent_A_Car_Web.Views.Cars
 {
-    public class CarController : Controller
+    public class CarsController : Controller
     {
-        public IActionResult ViewCars()
+        private readonly ApplicationDbContext _context;
+        public CarsController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.Cars.ToListAsync());
         }
+        
+       
     }
 }

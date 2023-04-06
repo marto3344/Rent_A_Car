@@ -69,7 +69,7 @@ namespace Rent_A_Car_Web.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
-            [Display(Name = "Username")]
+            [Display(Name = "Email")]
             public string Email { get; set; }
 
             /// <summary>
