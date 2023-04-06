@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rent_A_Car_Web.Data;
 
@@ -11,9 +12,11 @@ using Rent_A_Car_Web.Data;
 namespace Rent_A_Car_Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230406113734_cars3")]
+    partial class cars3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,21 +192,21 @@ namespace Rent_A_Car_Web.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,4)");
 
-                    b.Property<int>("RentedByUserId")
+                    b.Property<int>("RendedByUserId")
                         .HasColumnType("int");
+
+                    b.Property<string>("RentedByUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Seat")
                         .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("RentedByUserId");
 
                     b.ToTable("Cars");
                 });
@@ -345,9 +348,11 @@ namespace Rent_A_Car_Web.Data.Migrations
 
             modelBuilder.Entity("Rent_A_Car_Web.Data.Car", b =>
                 {
-                    b.HasOne("Rent_A_Car_Web.Data.User", null)
+                    b.HasOne("Rent_A_Car_Web.Data.User", "RentedByUser")
                         .WithMany("RentedCars")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("RentedByUserId");
+
+                    b.Navigation("RentedByUser");
                 });
 
             modelBuilder.Entity("Rent_A_Car_Web.Data.User", b =>

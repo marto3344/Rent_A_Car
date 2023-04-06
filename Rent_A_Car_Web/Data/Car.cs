@@ -14,7 +14,7 @@ namespace Rent_A_Car_Web.Data
         [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
         public bool Availabilyty { get; set; }=true;
-        public virtual User? RentedByUser { get; set; }
+        public int RentedByUserId { get; set; }
 
 
     }
