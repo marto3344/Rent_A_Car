@@ -27,7 +27,7 @@ namespace Rent_A_Car_Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Brand,Model,ImageUrl,Seat,Year,Description,Price")] Car car)
+        public async Task<IActionResult> Create([Bind("Id,Brand,Model,ImageUrl,Seat,Year,Description,Price")] Car car)//Metod za dobacqne na kola
         {
             if (ModelState.IsValid)
             {
@@ -36,6 +36,107 @@ namespace Rent_A_Car_Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(car);
+        }
+
+        public async Task<IActionResult> EditCar(int? id)//Vrushta view kogato e izbrana suotvetnata kola
+        {
+            if (id == null || _context.Cars == null)
+            {
+                return NotFound();
+            }
+
+            var car = await _context.Cars.FindAsync(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+            return View(car);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCar(int id, [Bind("Id,Brand,Model,ImageUrl,Seat,Year,Description,Price")] Car car)//Logika za redaktirane kola
+        {
+            if (id != car.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(car);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CarExists(car.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(car);
+        }
+        public async Task<IActionResult> CarDetails(int? id)
+        {
+            if (id == null || _context.Cars == null)
+            {
+                return NotFound();
+            }
+
+            var car = await _context.Cars
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            return View(car);
+        }
+        public async Task<IActionResult> DeleteCar(int? id)
+        {
+            if (id == null || _context.Cars == null)
+            {
+                return NotFound();
+            }
+
+            var car = await _context.Cars
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            return View(car);
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (_context.Cars == null)
+            {
+                return Problem("Entity set 'EventDbContext.Events'  is null.");
+            }
+            var car = await _context.Cars.FindAsync(id);
+            if (car != null)
+            {
+                _context.Cars.Remove(car);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        private bool CarExists(int id)
+        {
+            return _context.Cars.Any(c => c.Id == id);
         }
     }
 }
