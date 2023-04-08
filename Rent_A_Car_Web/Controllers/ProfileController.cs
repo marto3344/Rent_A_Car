@@ -20,21 +20,6 @@ namespace Rent_A_Car_Web.Controllers
         {
             return View(await _context.Users.ToListAsync());
         }
-        public async Task<IActionResult> ProfileDetails(string? nickname)
-        {
-            if (nickname == null || _context.Users == null)
-            {
-                return NotFound();
-            }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.NickName== nickname);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
-        }
     }
-    }
+}

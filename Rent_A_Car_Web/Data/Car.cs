@@ -15,6 +15,8 @@ namespace Rent_A_Car_Web.Data
         public decimal Price { get; set; }
         public bool Availabilyty { get; set; }=true;
         public int RentedByUserId { get; set; }
+        public DateTime RentStart { get; set; }=DateTime.Now;
+        public DateTime RentEnd { get; set; } = DateTime.Now;
 
 
     }
