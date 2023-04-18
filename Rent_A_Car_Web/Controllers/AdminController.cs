@@ -123,7 +123,7 @@ namespace Rent_A_Car_Web.Controllers
         {
             if (_context.Cars == null)
             {
-                return Problem("Entity set 'EventDbContext.Events'  is null.");
+                return Problem("Entity set ApplicationDbContext  is null.");
             }
             var car = await _context.Cars.FindAsync(id);
             if (car != null)
