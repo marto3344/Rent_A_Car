@@ -58,7 +58,7 @@ namespace Rent_A_Car_Web.Views.Cars
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RentCar(int id, [Bind("Id,Brand,Model,ImageUrl,Seat,Year,Description,Price")] Car car )
+        public async Task<IActionResult> RentCar(int id, [Bind("Id,Brand,Model,ImageUrl,Seat,Year,Description,Price")] Car car )//Logika za naemane na kola
         {
             var user = _userManager.FindByEmailAsync(User.Identity?.Name).Result;
             car = await _context.Cars

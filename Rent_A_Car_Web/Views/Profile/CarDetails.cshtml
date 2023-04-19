@@ -1,0 +1,26 @@
+﻿
+@model Rent_A_Car_Web.Data.Car;
+@{
+    ViewData["Title"] = $"Car details";
+    
+}
+<div class="container h-100 w-100" style="margin-top:5rem;" >
+   <div style="display:flex;justify-content:space-evenly;">
+        <div>
+        <img style="width:31.438rem; height:20.938rem;" src=@Html.DisplayFor(model => model.ImageUrl)  />
+    </div>
+    <div>
+        <h1>@Html.DisplayFor(model => model.Brand) @Html.DisplayFor(model => model.Model)</h1>
+        <h2>
+            @Html.DisplayFor(model => model.Price) $
+        </h2>
+        <p>
+            @Html.DisplayFor(model => model.Description)
+        </p>        
+    </div>
+   </div>
+   
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

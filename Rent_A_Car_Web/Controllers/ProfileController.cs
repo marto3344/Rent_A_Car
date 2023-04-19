@@ -18,7 +18,23 @@ namespace Rent_A_Car_Web.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return View(await _context.Cars.ToListAsync());
+        }
+        public async Task<IActionResult> CarDetails(int? id)
+        {
+            if (id == null || _context.Cars == null)
+            {
+                return NotFound();
+            }
+
+            var car = await _context.Cars
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            return View(car);
         }
 
     }
