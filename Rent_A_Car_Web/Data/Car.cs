@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Rent_A_Car_Web.Data
 {
@@ -15,7 +16,9 @@ namespace Rent_A_Car_Web.Data
         public decimal Price { get; set; }
         public bool Availabilyty { get; set; }=true;
         public string RentedByUserId { get; set; } = "";
+    
         public DateTime RentStart { get; set; }=DateTime.Now;
+ 
         public DateTime RentEnd { get; set; } = DateTime.Now;
 
 
