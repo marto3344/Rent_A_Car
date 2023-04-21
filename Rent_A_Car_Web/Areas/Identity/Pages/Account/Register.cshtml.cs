@@ -30,13 +30,14 @@ namespace Rent_A_Car_Web.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        private readonly ApplicationDbContext _context;
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +45,7 @@ namespace Rent_A_Car_Web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -71,8 +73,9 @@ namespace Rent_A_Car_Web.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Username is requiered")]
             [Display(Name = "Username")]
+        
             public string NickName { get; set; }
             [Required]
             [EmailAddress]
@@ -125,8 +128,19 @@ namespace Rent_A_Car_Web.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (_context.Users.Any(u => u.NickName == Input.NickName))
+            {
+                ModelState.AddModelError(nameof(Input.NickName),
+                                          $"There is alredy user registered with username '{Input.NickName}' .");
+            }
+            if (_context.Users.Any(u => u.IdentityNumber == Input.IdentityNumber))
+            {
+                ModelState.AddModelError(nameof(Input.IdentityNumber),
+                                          $"There is alredy user registered with this Identity number .");
+            }
             if (ModelState.IsValid)
             {
+               
                 var user = CreateUser();
                 user.NickName = Input.NickName;
                 user.FirstName = Input.FirstName;
