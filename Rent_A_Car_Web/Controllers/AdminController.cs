@@ -138,17 +138,6 @@ namespace Rent_A_Car_Web.Controllers
         {
             return _context.Cars.Any(c => c.Id == id);
         }
-        [AcceptVerbs("GET", "POST")]//Proverqva dali veche ima registriran potrebitel sus sushtoto ime
-        public IActionResult VerifyUsername(string nickname)
-        {
-            if (_context.Users.Any(u=>u.NickName==nickname))
-            {
-                Console.WriteLine("This runs");
-                return Json($"There is alredy user registered with username ' {nickname}' ."); 
-
-            }
-
-            return Json(true);
-        }
+       
     }
 }

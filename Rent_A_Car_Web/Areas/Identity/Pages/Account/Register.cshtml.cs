@@ -128,6 +128,11 @@ namespace Rent_A_Car_Web.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (!IsDigitsOnly(Input.IdentityNumber))
+            {
+                ModelState.AddModelError(nameof(Input.NickName),
+                                          $"Identity number must contain only digits!");
+            }
             if (_context.Users.Any(u => u.NickName == Input.NickName))
             {
                 ModelState.AddModelError(nameof(Input.NickName),
@@ -201,6 +206,16 @@ namespace Rent_A_Car_Web.Areas.Identity.Pages.Account
                     $"Ensure that '{nameof(User)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
+        }
+        private static bool IsDigitsOnly(string str)//Pomoshten method za da se validira egn-to. Methodut provereqva dali Input-at na potrebitelq e samo ot chisla
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
         }
 
         private IUserEmailStore<User> GetEmailStore()
