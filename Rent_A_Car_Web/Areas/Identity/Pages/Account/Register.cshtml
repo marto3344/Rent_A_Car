@@ -3,14 +3,34 @@
 @{
     ViewData["Title"] = "Register";
 }
-
-<h1>@ViewData["Title"]</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url("https://static.vecteezy.com/system/resources/previews/008/652/604/non_2x/car-rental-social-media-template-flat-cartoon-twitch-background-illustration-vector.jpg");
+            background-repeat: no-repeat, repeat;
+            background-color: #cccccc;
+            
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<h1 style="color:white;">@ViewData["Title"]</h1>
 
 <div class="row">
     <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
+            <form  style="justify-content:center id=" registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h2 style="color:white;">Create a new account.</h2>
+        <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-floating my-3">
                 <input asp-for="Input.NickName" class="form-control" autocomplete="username" aria-required="true" />
@@ -43,7 +63,7 @@
                 <span asp-validation-for="Input.IdentityNumber" class="text-danger"></span>
             </div>
 
-            
+
             <div class="form-floating my-3">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.Password"></label>
@@ -57,8 +77,11 @@
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>
-   
+
 </div>
+</body>
+</html>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -3,34 +3,66 @@
 @{
     ViewData["Title"] = "Car catalog";
 }
-<h1 class="mx-auto text-center">Car catalog</h1>
-<div class="container mt-4">
-    @if (Model.Any())
-    {
-        var availableCars = 0;
-        <div class="row" style="display:flex;justify-content:space-evenly;">
-        @foreach (var car in Model)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url("https://www.shutterstock.com/image-vector/sale-car-rental-concept-vector-260nw-1387577387.jpg");
+            background-repeat: no-repeat, repeat;
+            background-color: #cccccc;
+            
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="mx-auto text-center">Car catalog</h1>
+    <div class="container mt-4">
+        @if (Model.Any())
         {
+            var availableCars = 0;
+            <div class="row" style="display:flex;justify-content:space-evenly;">
+                @foreach (var car in Model)
+                {
 
-            if (car.Availabilyty)
-            {
-                availableCars++;
-                <div class="border-dark border-3 shadow-sm m-2 text-center col-4" style="width:14rem;height:16rem;">
-                   <a asp-action="CarDetails" asp-route-id="@car.Id" class="text-decoration-none text-black">
-                        <div>
-                            <div>
-                                <img class="mx-auto"src="@car.ImageUrl" alt=""style="width:9.375rem;height:6.25rem; margin-top:2rem;"/>
-                            </div>
-                            <h4>@car.Brand @car.Model</h4>
-                            <h5>@Math.Round(car.Price,2) $</h5>
+                    if (car.Availabilyty)
+                    {
+                        availableCars++;
+                        <div class="border-dark border-3 shadow-sm m-2 text-center col-4" style="width:14rem;height:16rem;">
+                            <a asp-action="CarDetails" asp-route-id="@car.Id" class="text-decoration-none text-black">
+                                <div>
+                                    <div>
+                                        <img class="mx-auto" src="@car.ImageUrl" alt="" style="width:9.375rem;height:6.25rem; margin-top:2rem;" />
+                                    </div>
+                                    <h4>@car.Brand @car.Model</h4>
+                                    <h5>@Math.Round(car.Price,2) $</h5>
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                    }
+
+                }
+            </div>
+            if (availableCars == 0)
+            {
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            We are sorry! There are no avilable cars at the moment
+                        </div>
+                    </div>
                 </div>
             }
-
         }
-        </div>
-        if (availableCars == 0)
+        else
         {
             <div class="col-12">
                 <div class="card">
@@ -40,17 +72,10 @@
                 </div>
             </div>
         }
-    }
-    else
-    {     
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        We are sorry! There are no avilable cars at the moment
-                    </div>
-                </div>
-            </div>
-    }
-</div>
+    </div>
+</body>
+</html>
+
+
 
 
